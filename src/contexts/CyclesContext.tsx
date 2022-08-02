@@ -29,11 +29,11 @@ interface CyclesContextType {
   interruptCurrentCycle: () => void
 }
 
+export const CyclesContext = createContext({} as CyclesContextType)
+
 interface CyclesContextProviderProps {
   children: ReactNode
 }
-
-export const CyclesContext = createContext({} as CyclesContextType)
 
 export function CyclesContextProvider({
   children,
@@ -46,8 +46,10 @@ export function CyclesContextProvider({
     },
     () => {
       const storedStateAsJSON = localStorage.getItem(
-        '@pomodo-app:cycles-state-1.0.0',
+        '@pomodoro-app:cycles-state-1.0.0',
       )
+
+      console.log(storedStateAsJSON)
 
       if (storedStateAsJSON) {
         return JSON.parse(storedStateAsJSON)
