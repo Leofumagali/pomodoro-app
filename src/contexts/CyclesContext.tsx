@@ -9,6 +9,7 @@ import {
 import {
   ActionTypes,
   addNewCycleAction,
+  interruptCurrentCycleAction,
   markCurrentCycleAsFinishedAction,
 } from '../reducers/cycles/actions'
 import { Cycle, cyclesReducer } from '../reducers/cycles/reducer'
@@ -48,8 +49,6 @@ export function CyclesContextProvider({
       const storedStateAsJSON = localStorage.getItem(
         '@pomodoro-app:cycles-state-1.0.0',
       )
-
-      console.log(storedStateAsJSON)
 
       if (storedStateAsJSON) {
         return JSON.parse(storedStateAsJSON)
@@ -99,12 +98,7 @@ export function CyclesContextProvider({
   }
 
   function interruptCurrentCycle() {
-    dispatch({
-      type: ActionTypes.INTERRUPT_CURRENT_CYCLE,
-      payload: {
-        activeCycleId,
-      },
-    })
+    dispatch(interruptCurrentCycleAction())
 
     document.title = 'Pomodoro App'
   }
